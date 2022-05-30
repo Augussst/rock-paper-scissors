@@ -12,17 +12,28 @@ function playRound(playerSelection, computerSelection) {
     (playerSelection === "rock" && computerSelection === "scissors") ||
     (playerSelection === "scissors" && computerSelection === "paper")
   ) {
-    return "You Win! " + playerSelection + " beats " + computerSelection;
+    return "win";
   } else if (
     // Player losing logic
     (computerSelection === "paper" && playerSelection === "rock") ||
     (computerSelection === "rock" && playerSelection === "scissors") ||
     (computerSelection === "scissors" && playerSelection === "paper")
   ) {
-    return "You Lose! " + computerSelection + " beats " + playerSelection;
+    return "lose";
   } else if (playerSelection === computerSelection) {
-    return "It's a draw";
+    return "draw";
   }
+}
+
+// "You Win! " + playerSelection + " beats " + computerSelection;
+// "You Lose! " + computerSelection + " beats " + playerSelection;
+// "It's a draw";
+let score = 0;
+// make a function that count a score if player win
+function scoreCounter(result) {
+  if (result == "win") {
+    return ++score;
+  } else return score;
 }
 
 // make a functoin that plays 5 round of rps (repeat playRound 5 times)
@@ -33,13 +44,28 @@ function game() {
     const playerSelection = prompt(
       "Choose rock, paper, or scissors?"
     ).toLowerCase();
+    const result = playRound(playerSelection, computerSelection);
     console.log("Round " + (i + 1));
     console.log(
       "You pick " + playerSelection + " and the bot pick " + computerSelection
     );
-    console.log(playRound(playerSelection, computerSelection));
-    console.log(scoreCounter());
+
+    if (result == "win") {
+      console.log(
+        "You Win! " + playerSelection + " beats " + computerSelection
+      );
+    } else if (result == "lose") {
+      console.log(
+        "You Lose! " + computerSelection + " beats " + playerSelection
+      );
+    } else console.log("it's a draw");
+
+    console.log("Score: " + scoreCounter(result));
   }
 }
 
-game();
+function restart() {
+  score = 0;
+  console.log("\n \n \n");
+  game();
+}
