@@ -25,9 +25,21 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-const computerSelection = computerPlay();
-const playerSelection = "paper";
-
 // make a functoin that plays 5 round of rps (repeat playRound 5 times)
 
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+  for (i = 0; i < 5; i++) {
+    const computerSelection = computerPlay();
+    const playerSelection = prompt(
+      "Choose rock, paper, or scissors?"
+    ).toLowerCase();
+    console.log("Round " + (i + 1));
+    console.log(
+      "You pick " + playerSelection + " and the bot pick " + computerSelection
+    );
+    console.log(playRound(playerSelection, computerSelection));
+    console.log(scoreCounter());
+  }
+}
+
+game();
